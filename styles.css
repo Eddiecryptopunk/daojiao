@@ -1,0 +1,795 @@
+:root {
+  --ink: #17201c;
+  --muted: #5e675f;
+  --paper: #f7f2e8;
+  --paper-deep: #eee3d0;
+  --jade: #2f6657;
+  --jade-dark: #183d36;
+  --cinnabar: #b34b32;
+  --gold: #c59b4b;
+  --blue: #315c78;
+  --line: rgba(23, 32, 28, 0.14);
+  --shadow: 0 22px 70px rgba(29, 37, 33, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family:
+    "Noto Serif SC", "Songti SC", "STSong", "Microsoft YaHei", system-ui,
+    sans-serif;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px clamp(18px, 4vw, 56px);
+  color: #fff;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    padding 0.25s ease;
+}
+
+.site-header.scrolled,
+.site-header.nav-open {
+  color: var(--ink);
+  background: rgba(247, 242, 232, 0.94);
+  box-shadow: 0 10px 35px rgba(17, 27, 23, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 190px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  font-size: 17px;
+  letter-spacing: 0;
+}
+
+.brand small {
+  margin-top: -4px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 30px);
+  font-family: "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.main-nav a {
+  position: relative;
+  padding: 8px 0;
+}
+
+.main-nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  height: 2px;
+  background: var(--cinnabar);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  transform: scaleX(1);
+}
+
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 5px auto;
+  background: currentColor;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 94vh;
+  overflow: hidden;
+  color: #fff;
+  isolation: isolate;
+}
+
+.hero picture,
+.hero picture img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero picture img {
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(15, 27, 22, 0.78), rgba(15, 27, 22, 0.44) 52%, rgba(15, 27, 22, 0.18)),
+    linear-gradient(0deg, rgba(14, 22, 18, 0.66), rgba(14, 22, 18, 0.04) 45%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  width: min(760px, calc(100% - 36px));
+  margin: 0 0 clamp(104px, 15vh, 160px) clamp(18px, 7vw, 96px);
+}
+
+.eyebrow {
+  margin: 0 0 13px;
+  color: var(--cinnabar);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: #f0c66d;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 720px;
+  margin-bottom: 22px;
+  font-size: clamp(48px, 8vw, 98px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-bottom: 18px;
+  font-size: clamp(30px, 4.8vw, 54px);
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.hero-copy {
+  max-width: 640px;
+  margin-bottom: 30px;
+  font-size: clamp(18px, 2vw, 22px);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-actions,
+.hero-panel,
+.apply {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-family: "Microsoft YaHei", system-ui, sans-serif;
+  font-weight: 700;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.primary-action {
+  color: #fff;
+  background: var(--cinnabar);
+  border: 1px solid var(--cinnabar);
+  box-shadow: 0 12px 28px rgba(114, 43, 29, 0.22);
+}
+
+.secondary-action {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.primary-action:hover,
+.secondary-action:hover {
+  transform: translateY(-2px);
+}
+
+.hero-panel {
+  position: absolute;
+  right: clamp(18px, 5vw, 70px);
+  bottom: clamp(28px, 6vw, 70px);
+  z-index: 2;
+  max-width: 390px;
+  padding: 19px 22px;
+  background: rgba(15, 31, 26, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  backdrop-filter: blur(16px);
+}
+
+.hero-panel strong {
+  color: #f4cc71;
+  font-size: 30px;
+}
+
+.hero-panel span {
+  flex: 1 1 210px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 14px;
+}
+
+.section,
+.band {
+  padding: clamp(72px, 9vw, 124px) clamp(18px, 5vw, 70px);
+}
+
+.band {
+  background: var(--paper-deep);
+}
+
+.section-heading {
+  width: min(820px, 100%);
+  margin-bottom: clamp(32px, 5vw, 54px);
+}
+
+.section-heading p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.intro-grid,
+.artifact-grid,
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.intro-grid article,
+.artifact-card,
+.learning-grid div {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.46);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.intro-grid span,
+.timeline span {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--cinnabar);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.intro-grid p,
+.artifact-card p,
+.learning-grid p,
+.timeline p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.thought-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 70px);
+  align-items: stretch;
+}
+
+.principle-list {
+  display: grid;
+  gap: 12px;
+}
+
+.principle {
+  width: 100%;
+  padding: 18px 20px;
+  text-align: left;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.principle span,
+.principle small {
+  display: block;
+}
+
+.principle span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.principle small {
+  color: var(--muted);
+}
+
+.principle.active {
+  color: #fff;
+  background: var(--jade-dark);
+  border-color: var(--jade-dark);
+}
+
+.principle.active small {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.principle-detail {
+  min-height: 376px;
+  padding: clamp(28px, 5vw, 58px);
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(24, 61, 54, 0.96), rgba(47, 102, 87, 0.9)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Sculpture%20of%20the%20Mountain%20of%20the%20Immortals%20%28b%29.jpg")
+      center/cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.detail-kicker {
+  color: #f0c66d;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.principle-detail h3 {
+  font-size: clamp(34px, 5vw, 62px);
+}
+
+.principle-detail p:last-child {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 19px;
+}
+
+.longhu {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.94fr) minmax(300px, 1fr);
+  gap: clamp(28px, 5vw, 74px);
+  align-items: center;
+}
+
+.longhu-media {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.longhu-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.longhu-copy p {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.fact-list {
+  display: grid;
+  gap: 12px;
+  margin: 30px 0 0;
+}
+
+.fact-list div {
+  display: grid;
+  grid-template-columns: 98px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.fact-list dt {
+  color: var(--jade);
+  font-weight: 800;
+}
+
+.fact-list dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.artifact-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.artifact-card {
+  min-height: 250px;
+  background: #fffaf0;
+}
+
+.artifact-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 22px;
+  place-items: center;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.artifact-card:nth-child(2) .artifact-icon {
+  background: var(--cinnabar);
+}
+
+.artifact-card:nth-child(3) .artifact-icon {
+  background: var(--gold);
+}
+
+.artifact-card:nth-child(4) .artifact-icon {
+  background: var(--jade);
+}
+
+.route {
+  background:
+    linear-gradient(rgba(238, 227, 208, 0.92), rgba(238, 227, 208, 0.94)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/20240206%20Cormorant%20fishing%20in%20the%20Longhu%20Mountain.jpg")
+      center/cover;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(23, 32, 28, 0.22);
+}
+
+.timeline article {
+  position: relative;
+  padding: 32px 24px 10px 0;
+}
+
+.timeline article::before {
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--cinnabar);
+  border-radius: 50%;
+  content: "";
+}
+
+.learning-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.learning-grid div {
+  background: transparent;
+}
+
+.apply {
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(72px, 9vw, 112px) clamp(18px, 5vw, 70px);
+  color: #fff;
+  background:
+    linear-gradient(120deg, rgba(24, 61, 54, 0.96), rgba(21, 38, 34, 0.92)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/The%20Statue%20of%20Zhang%20Tianshi%20in%20Shangqing%20Town.jpg")
+      center/cover;
+}
+
+.apply-copy {
+  width: min(500px, 100%);
+}
+
+.apply-copy .eyebrow {
+  color: #f0c66d;
+}
+
+.apply-copy p:not(.eyebrow) {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 18px;
+}
+
+.inquiry-form {
+  display: grid;
+  width: min(520px, 100%);
+  gap: 15px;
+  padding: 26px;
+  color: var(--ink);
+  background: rgba(255, 250, 240, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+}
+
+.inquiry-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--jade-dark);
+  font-weight: 800;
+}
+
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+  width: 100%;
+  padding: 12px 13px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(23, 32, 28, 0.18);
+  border-radius: 6px;
+  outline: none;
+}
+
+.inquiry-form input:focus,
+.inquiry-form select:focus,
+.inquiry-form textarea:focus {
+  border-color: var(--cinnabar);
+  box-shadow: 0 0 0 3px rgba(179, 75, 50, 0.13);
+}
+
+.inquiry-form textarea {
+  resize: vertical;
+}
+
+.inquiry-form .primary-action {
+  width: 100%;
+  cursor: pointer;
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.form-note.success {
+  color: var(--jade);
+  font-weight: 800;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px clamp(18px, 5vw, 70px);
+  color: rgba(255, 255, 255, 0.72);
+  background: #121a17;
+  font-size: 14px;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .main-nav {
+    position: absolute;
+    top: 78px;
+    right: 18px;
+    left: 18px;
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 18px;
+    padding: 18px;
+    color: var(--ink);
+    background: rgba(247, 242, 232, 0.98);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .site-header.nav-open .main-nav {
+    display: grid;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .intro-grid,
+  .artifact-grid,
+  .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .thought-layout,
+  .longhu {
+    grid-template-columns: 1fr;
+  }
+
+  .longhu-media img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .apply {
+    display: grid;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-header {
+    padding: 14px 16px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    font-size: 21px;
+  }
+
+  .brand small {
+    display: none;
+  }
+
+  .hero {
+    min-height: 92vh;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(90deg, rgba(15, 27, 22, 0.82), rgba(15, 27, 22, 0.46)),
+      linear-gradient(0deg, rgba(14, 22, 18, 0.78), rgba(14, 22, 18, 0.12) 56%);
+  }
+
+  .hero-content {
+    width: calc(100% - 32px);
+    margin: 0 16px 156px;
+  }
+
+  .hero-copy {
+    font-size: 17px;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
+  }
+
+  .hero-panel {
+    right: 16px;
+    bottom: 22px;
+    left: 16px;
+    max-width: none;
+  }
+
+  .intro-grid,
+  .artifact-grid,
+  .timeline,
+  .learning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    border-top: 0;
+    border-left: 1px solid rgba(23, 32, 28, 0.22);
+  }
+
+  .timeline article {
+    padding: 0 0 28px 24px;
+  }
+
+  .timeline article::before {
+    top: 6px;
+    left: -7px;
+  }
+
+  .fact-list div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .site-footer {
+    display: grid;
+  }
+}
